@@ -1,3 +1,49 @@
+const GITHUB = 'https://github.com/nithyaV-dev/';
+const LINKEDIN = 'https://www.linkedin.com/in/nithya-v-693627333/';
+const RESUME = 'images/Nithya_Santoshini_Vasireddi_Resume.pdf';
+const EMAIL = 'nithyavasireddi@gmail.com';
+
+
+// GitHub links
+document.querySelectorAll('.github-link').forEach(link => {
+  link.href = GITHUB;
+});
+
+// LinkedIn links
+document.querySelectorAll('.linkedin-link').forEach(link => {
+  link.href = LINKEDIN;
+});
+
+
+async function copyEmail(event) {
+  event.preventDefault();
+
+  // Save the link before using await
+  const link = event.currentTarget;
+  const originalText = link.textContent;
+
+  try {
+    await navigator.clipboard.writeText(EMAIL);
+
+    link.textContent = 'Email copied :)';
+
+    setTimeout(() => {
+      link.textContent = originalText;
+    }, 1000);
+
+  } catch (error) {
+    console.error('Clipboard error:', error);
+
+    alert('Copy failed. Open the website using HTTPS or localhost, then try again.');
+  }
+}
+
+// Resume download links
+document.querySelectorAll('.resume-link').forEach(link => {
+  link.href = RESUME;
+  link.setAttribute('download', '');
+});
+
 const navLinks = document.querySelectorAll('.ul-list li a');
 const sections = document.querySelectorAll('section');
 
