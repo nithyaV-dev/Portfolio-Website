@@ -44,6 +44,49 @@ document.querySelectorAll('.resume-link').forEach(link => {
   link.setAttribute('download', '');
 });
 
+const EMAILJS_SERVICE_ID = 'service_kf4jvm8';
+const EMAILJS_TEMPLATE_ID = 'template_b3c2ajp';
+const EMAILJS_PUBLIC_KEY = '-NkikEfCOWNO_pzb5';
+
+emailjs.init({
+  publicKey: EMAILJS_PUBLIC_KEY
+});
+
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const button = contactForm.querySelector('button[type="submit"]');
+    const originalText = button ? button.textContent : '';
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending...';
+    }
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        contactForm
+      );
+
+      alert('Message sent successfully! Thank you for contacting me.');
+      contactForm.reset();
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      alert('Message could not be sent. Please try again or email me directly.');
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    }
+  });
+}
+
 const navLinks = document.querySelectorAll('.ul-list li a');
 const sections = document.querySelectorAll('section');
 
