@@ -585,6 +585,16 @@ hr {
   background: #2c36d9;
 }
 
+#email-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#email-link:hover {
+  color: #8b5cf6;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .contact-content {
